@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDevelopmentRegion</key><string>id</string>
+    <key>CFBundleExecutable</key><string>iwifyou</string>
+    <key>CFBundleIdentifier</key><string>app.iwifyou.mac</string>
+    <key>CFBundleName</key><string>iwifyou</string>
+    <key>CFBundleDisplayName</key><string>iwifyou</string>
+    <key>CFBundlePackageType</key><string>APPL</string>
+    <key>CFBundleShortVersionString</key><string>0.3.0</string>
+    <key>CFBundleVersion</key><string>5</string>
+    <key>CFBundleIconFile</key><string>AppIcon</string>
+    <key>LSMinimumSystemVersion</key><string>14.0</string>
+    <key>NSHighResolutionCapable</key><true/>
+    <key>ATSApplicationFontsPath</key><string>Fonts</string>
+    <key>LSApplicationCategoryType</key><string>public.app-category.utilities</string>
+    <key>NSLocationUsageDescription</key><string>macOS hanya menampilkan nama jaringan Wi-Fi di sekitar kepada app yang diberi akses Lokasi. iwifyou memakainya untuk menilai kualitas channel; lokasimu tidak disimpan atau dikirim.</string>
+    <key>NSLocationWhenInUseUsageDescription</key><string>macOS hanya menampilkan nama jaringan Wi-Fi di sekitar kepada app yang diberi akses Lokasi. iwifyou memakainya untuk menilai kualitas channel; lokasimu tidak disimpan atau dikirim.</string>
+    <key>NSLocalNetworkUsageDescription</key><string>iwifyou terhubung ke router lokal untuk membaca dan mengganti channel Wi-Fi pilihanmu.</string>
+    <key>NSAppTransportSecurity</key>
+    <dict><key>NSAllowsLocalNetworking</key><true/></dict>
+</dict>
+</plist>
