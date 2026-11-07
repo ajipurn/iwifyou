@@ -2,6 +2,13 @@
 
 App macOS untuk router **ZTE F460** tanpa membuka panel 192.168.1.1 di browser: status internet dan redaman fiber, daftar dan blokir perangkat, info serta nama/password Wi-Fi, kualitas dan pergantian channel 2,4 GHz, diagnosa koneksi, IP tetap, port forwarding, blokir situs, notifikasi perangkat baru, dan restart router. Tampil sebagai jendela biasa di Dock, dengan ikon menu bar untuk ganti channel cepat.
 
+[English](README.md)
+
+![Halaman Status](docs/screenshots/status.png)
+
+> [!WARNING]
+> iwifyou adalah proyek independen, **tidak berafiliasi dengan atau didukung oleh ZTE** maupun penyedia internet mana pun. App baru diuji pada **satu** unit F460 bawaan ISP; varian firmware lain bisa berbeda, dan app menolak halaman yang tidak dikenalinya. Mengubah pengaturan router bisa memutus koneksi; risiko pemakaian ditanggung sendiri (lihat [LICENSE](LICENSE)).
+
 ## Tampilan dan logo
 
 Logo: huruf "i" yang titiknya memancarkan dua gelombang sinyal — ubin tinta, huruf putih, gelombang amber, tanpa gradasi. Ikon app digambar sebagai vektor oleh `scripts/make-icon.swift` (`swift scripts/make-icon.swift preview.png` untuk pratinjau 1024 px); geometri yang sama ada di `Sources/iwifyou/Logo.swift` untuk sidebar dan ikon template menu bar.
@@ -27,13 +34,18 @@ Di **Blokir Situs**, semua situs bisa dihapus, termasuk preset YouTube/TikTok. *
 
 ## Menjalankan
 
-Memerlukan macOS 14 atau lebih baru dan toolchain Swift 6.2 atau lebih baru. Tidak ada dependensi paket eksternal.
+Belum ada unduhan siap pakai; build dari source. Memerlukan macOS 14 atau lebih baru dan toolchain Swift 6.2 atau lebih baru (Xcode 26 atau Command Line Tools). Tidak ada dependensi paket eksternal.
 
 ```sh
+git clone https://github.com/ajipurn/iwifyou.git
+cd iwifyou
 ./scripts/build-app.sh
+open build/iwifyou.app
 ```
 
-Buka `build/iwifyou.app` dari Finder. Jendela utama terbuka dan app tampil di Dock; ikon Wi-Fi dalam lingkaran juga muncul di menu bar. Jendela **Akun router** terbuka pada pembukaan pertama. Menutup jendela tidak menghentikan app: klik ikon Dock atau **Buka jendela** di menu bar untuk membukanya lagi.
+Bundle ditandatangani ad hoc dan belum dinotarisasi. Karena dibuild di Mac sendiri, app langsung terbuka. Jika disalin ke Mac lain, Gatekeeper akan memblokirnya sampai diizinkan di **Pengaturan Sistem › Privasi & Keamanan**.
+
+Jendela utama terbuka dan app tampil di Dock; logo iwifyou juga muncul di menu bar. Jendela **Akun router** terbuka pada pembukaan pertama. Menutup jendela tidak menghentikan app: klik ikon Dock atau **Buka jendela** di menu bar untuk membukanya lagi.
 
 1. Di jendela **Akun router**, masukkan IP router, misalnya `192.168.1.1`.
 2. Ganti channel dari bagian **Channel** di jendela utama atau dari ikon menu bar.
@@ -155,3 +167,11 @@ Versi 0.1.2 mengenali halaman F460 dengan `logout_from=login_timeout` sebagai se
 Capture perangkat asli boleh diletakkan sementara di `work/` dan diperiksa tanpa koneksi jaringan dengan `IWIFYOU_CAPTURE=/path/to/capture ./scripts/test.sh`. Jangan commit capture: HTML router dapat memuat password Wi-Fi. Fixture yang masuk proyek bersifat sintetis.
 
 Dokumentasi API: [MenuBarExtra](https://developer.apple.com/documentation/swiftui/menubarextra), [Local networking](https://developer.apple.com/documentation/bundleresources/information-property-list/nsapptransportsecurity/nsallowslocalnetworking), [Keychain](https://developer.apple.com/documentation/security/adding-a-password-to-the-keychain).
+
+## Kontribusi
+
+Laporan bug dan dukungan untuk firmware F460 lain atau model ZTE lain dipersilakan. Jika membagikan halaman router untuk menambah dukungan, **hapus dulu password, kunci Wi-Fi, nomor seri, LOID, dan alamat MAC**; HTML router sering memuat password Wi-Fi tanpa enkripsi.
+
+## Lisensi
+
+[MIT](LICENSE). Font [Manrope](https://github.com/googlefonts/manrope) yang dibundel memakai SIL Open Font License 1.1.
