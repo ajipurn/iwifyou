@@ -34,7 +34,17 @@ Per-device speed limits are **not** available: this firmware only has per-port/p
 
 ## Install
 
-No prebuilt download yet. Build it from source:
+### Download
+
+1. Download `iwifyou-<version>-macos.zip` from the [latest release](https://github.com/ajipurn/iwifyou/releases/latest). It runs on Apple Silicon and Intel Macs with macOS 14 or later.
+2. Unzip it and move `iwifyou.app` to **Applications**.
+3. The app is not notarized by Apple, so the first launch is blocked:
+   - **macOS 15 or later:** open the app once, then go to **System Settings › Privacy & Security** and click **Open Anyway**.
+   - **macOS 14:** Control-click the app, choose **Open**, then confirm.
+
+Or, if you prefer the terminal, remove the download flag once: `xattr -dr com.apple.quarantine /Applications/iwifyou.app`.
+
+### Build from source
 
 - macOS 14 or later
 - Swift 6.2 or later (Xcode 26, or the Command Line Tools)
@@ -47,7 +57,7 @@ cd iwifyou
 open build/iwifyou.app
 ```
 
-The bundle is ad-hoc signed and not notarized. Because you built it on your own Mac it opens normally. If you copy it to another Mac, Gatekeeper will block it until you allow it in **System Settings › Privacy & Security**.
+A local build opens normally. Add `--universal` to build for both Apple Silicon and Intel, as the release does.
 
 On first launch the **Router account** window asks for the router address (usually `192.168.1.1`) and the admin login. Saving the password in the Keychain is optional. Location access is only needed to show the names of nearby networks; macOS requires it for Wi-Fi scan results.
 

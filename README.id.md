@@ -34,7 +34,19 @@ Di **Blokir Situs**, semua situs bisa dihapus, termasuk preset YouTube/TikTok. *
 
 ## Menjalankan
 
-Belum ada unduhan siap pakai; build dari source. Memerlukan macOS 14 atau lebih baru dan toolchain Swift 6.2 atau lebih baru (Xcode 26 atau Command Line Tools). Tidak ada dependensi paket eksternal.
+### Unduh
+
+1. Unduh `iwifyou-<versi>-macos.zip` dari [release terbaru](https://github.com/ajipurn/iwifyou/releases/latest). Berjalan di Mac Apple Silicon dan Intel dengan macOS 14 atau lebih baru.
+2. Ekstrak lalu pindahkan `iwifyou.app` ke **Applications**.
+3. App belum dinotarisasi Apple, jadi pembukaan pertama diblokir:
+   - **macOS 15 atau lebih baru:** buka app sekali, lalu ke **Pengaturan Sistem › Privasi & Keamanan** dan klik **Tetap Buka**.
+   - **macOS 14:** Control-klik app, pilih **Buka**, lalu konfirmasi.
+
+Atau lewat Terminal, hapus tanda unduhan sekali saja: `xattr -dr com.apple.quarantine /Applications/iwifyou.app`.
+
+### Build dari source
+
+Memerlukan macOS 14 atau lebih baru dan toolchain Swift 6.2 atau lebih baru (Xcode 26 atau Command Line Tools). Tidak ada dependensi paket eksternal.
 
 ```sh
 git clone https://github.com/ajipurn/iwifyou.git
@@ -43,7 +55,7 @@ cd iwifyou
 open build/iwifyou.app
 ```
 
-Bundle ditandatangani ad hoc dan belum dinotarisasi. Karena dibuild di Mac sendiri, app langsung terbuka. Jika disalin ke Mac lain, Gatekeeper akan memblokirnya sampai diizinkan di **Pengaturan Sistem › Privasi & Keamanan**.
+Build lokal langsung terbuka. Tambahkan `--universal` untuk build Apple Silicon sekaligus Intel, seperti file release.
 
 Jendela utama terbuka dan app tampil di Dock; logo iwifyou juga muncul di menu bar. Jendela **Akun router** terbuka pada pembukaan pertama. Menutup jendela tidak menghentikan app: klik ikon Dock atau **Buka jendela** di menu bar untuk membukanya lagi.
 
