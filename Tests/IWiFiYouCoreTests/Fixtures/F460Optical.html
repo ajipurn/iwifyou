@@ -1,0 +1,55 @@
+<!doctype html><html><head><title>F460 fixture</title></head><body id="htmlBody">
+<form name="flogout" id="flogout" method="post" onsubmit="return false;" action="/" target="_top"><input type="hidden" name="logout" id="logout" value=""></form>
+<script language="javascript">
+function doRxTxPowerShow()
+{
+var LosInfo = "0";
+var RxPower = "-215400";
+var TxPower = "27400";
+
+RxPower = parseFloat(RxPower/10000).toFixed(1);
+TxPower = parseFloat(TxPower/10000).toFixed(1);
+if(LosInfo == "1")
+{
+setFont("Fnt_RxPower", "--");
+setFont("Fnt_TxPower", "--");
+}
+else
+{
+setFont("Fnt_RxPower", RxPower);
+setFont("Fnt_TxPower", TxPower);
+}
+}
+</script>
+<table class="infor" id="TABLE_DEV_ADVANCE">
+<tr class="white_1">
+<td class="tdleft">Optical Module Input Power(dBm)</td>
+<td class="tdright"><font id="Fnt_RxPower" name="Fnt_RxPower"></font></td>
+</tr>
+<tr class="white_1">
+<td class="tdleft">Optical Module Output Power(dBm)</td>
+<td class="tdright"><font id="Fnt_TxPower" name="Fnt_TxPower"></font></td>
+</tr>
+<tr class="white_1">
+<td class="tdleft">Optical Module Supply Voltage(uV)</td>
+<td class="tdright">3213000</td>
+</tr>
+<tr class="white_1">
+<td class="tdleft">Optical Transmitter Bias Current(uA)</td>
+<td class="tdright">13900</td>
+</tr>
+<tr class="white_1">
+<td class="tdleft">Operating Temperature of the Optical Module(&#176;C)</td>
+<td class="tdright">48</td>
+</tr>
+</table>
+<FORM NAME=fSubmit ID=fSubmit METHOD='POST' action=>
+<INPUT type='hidden' name=PonLoid   ID=PonLoid value=''>
+<script language=javascript>Transfer_meaning('PonLoid','FIXTURE');</script>
+<INPUT type='hidden' name=LoidPasswd   ID=LoidPasswd value=''>
+<script language=javascript>Transfer_meaning('LoidPasswd','fixture\x2dloid\x2dsecret');</script>
+<INPUT type='hidden' name=LoidState   ID=LoidState value=''>
+<script language=javascript>Transfer_meaning('LoidState','2');</script>
+</FORM>
+<script language="javascript">function myOnLoad(){pageLoad(getURL("pon\x5fstatus\x5flink\x5finfo\x5ft\x2egch"));}</script>
+</body></html>
