@@ -3,17 +3,32 @@ set -euo pipefail
 cd "${0:A:h:h}"
 source scripts/swift-env.sh
 
-configuration="${1:-release}"
-if [[ "$configuration" != "release" && "$configuration" != "debug" ]]; then
-    print -u2 'Usage: ./scripts/build-app.sh [release|debug]'
-    exit 1
-fi
+usage='Usage: ./scripts/build-app.sh [release|debug] [--universal]'
+configuration="release"
+universal=false
+for argument in "$@"; do
+    case "$argument" in
+        release|debug) configuration="$argument" ;;
+        --universal) universal=true ;;
+        *) print -u2 "$usage"; exit 1 ;;
+    esac
+done
 
-swiftpm build -c "$configuration"
-binary_directory="$(swiftpm build -c "$configuration" --show-bin-path)"
 application="${PWD}/build/iwifyou.app"
 mkdir -p "$application/Contents/MacOS" "$application/Contents/Resources"
-cp "$binary_directory/iwifyou" "$application/Contents/MacOS/iwifyou"
+if $universal; then
+    # Apple Silicon and Intel slices, for builds shared with other Macs.
+    slices=()
+    for triple in arm64-apple-macosx14.0 x86_64-apple-macosx14.0; do
+        swiftpm build -c "$configuration" --triple "$triple"
+        slices+=("$(swiftpm build -c "$configuration" --triple "$triple" --show-bin-path)/iwifyou")
+    done
+    lipo -create "${slices[@]}" -output "$application/Contents/MacOS/iwifyou"
+else
+    swiftpm build -c "$configuration"
+    binary_directory="$(swiftpm build -c "$configuration" --show-bin-path)"
+    cp "$binary_directory/iwifyou" "$application/Contents/MacOS/iwifyou"
+fi
 cp Resources/Info.plist "$application/Contents/Info.plist"
 mkdir -p "$application/Contents/Resources/Fonts"
 cp Resources/Fonts/* "$application/Contents/Resources/Fonts/"
